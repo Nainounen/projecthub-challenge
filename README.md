@@ -59,7 +59,7 @@ const projects = [
 ];
 ```
 
-## 🔧 Komponentencode – `ProjectCard.tsx`
+## 🔧 Komponentencode – `src/app/components/ProjectCard.tsx`
 
 ```ts
 interface ProjectProps {
