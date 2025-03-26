@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 React Challenge – ProjectCard Bugfix
 
-## Getting Started
+## 🎯 Ziel
 
-First, run the development server:
+In dieser Aufgabe wirst du eine React-Komponente (`ProjectCard`) in eine Seite einbinden und einen kleinen Bug beheben.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📋 Aufgabe
+
+1. Du bekommst den Code für die Komponente `ProjectCard.tsx` (siehe unten).
+2. In der Datei `page.tsx` findest du ein Array mit Projekten.
+3. Deine Aufgabe ist es:
+   - [ ] Die `ProjectCard`-Komponente in `page.tsx` korrekt zu **importieren und verwenden**
+   - [ ] Für jedes Projekt aus dem Array eine Card anzuzeigen
+   - [ ] Den **Bug in der Komponente zu finden und zu beheben** (der Status wird aktuell nicht angezeigt)
+   - [ ] (Optional) Den Status farblich hervorzuheben (z. B. grün für „läuft“)
+
+---
+### 💡 Tipp
+
+Um eine Komponente für jedes Projekt darzustellen, kannst du `.map()` verwenden:
+
+```tsx
+{projects.map((project) => (
+  <ProjectCard key={project.id} project={project} />
+))}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📂 Dateien & Pfade
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 📁 `src/components/ProjectCard.tsx` → **Komponente**
+- 📄 `src/app/page.tsx` → **Einbindung und Anzeige**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧱 Beispiel-Projektdaten (in `page.tsx` vorhanden)
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+const projects = [
+  {
+    id: 1,
+    title: "Projecthub",
+    description: "Plattform für Swisscom-Lernendenprojekte",
+    status: "läuft"
+  },
+  {
+    id: 2,
+    title: "Sitelab",
+    description: "Interner Webseiten-Baukasten",
+    status: "offen"
+  },
+  {
+    id: 3,
+    title: "AI Helper",
+    description: "Bewerbungshilfe mit KI",
+    status: "abgeschlossen"
+  }
+];
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Komponentencode – `ProjectCard.tsx`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```ts
+interface ProjectProps {
+  project: {
+    title: string;
+    description: string;
+    status: "offen" | "läuft" | "abgeschlossen";
+  };
+}
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export default function ProjectCard({ project }: ProjectProps) {
+  return (
+    <div className="bg-gray-800 rounded-xl p-4 shadow-lg">
+      <h2 className="text-xl font-semibold mb-1">{project.title}</h2>
+      <p className="text-sm text-gray-300 mb-2">{project.description}</p>
+      <p className="text-xs font-bold">
+        Status: {project.status === "läuft" || "offen" || "abgeschlossen"}
+      </p>
+    </div>
+  );
+}
